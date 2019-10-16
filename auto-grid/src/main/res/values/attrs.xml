@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AutoGridView">
+        <attr name="cellSpacing" format="integer" />
+        <attr name="maxColumn" format="integer" />
+        <attr name="maxRaw" format="integer" />
+    </declare-styleable>
+</resources>
