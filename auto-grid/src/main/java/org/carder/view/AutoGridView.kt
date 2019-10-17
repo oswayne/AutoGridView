@@ -62,13 +62,14 @@ open class AutoGridView : ViewGroup {
 
     private var childViewList = ArrayList<View>(DEFAULT_MAX_COLUMN * DEFAULT_MAX_RAW)
 
-    private var onItemClickListener: OnItemClickListener<View>? = null
-    private var onItemLongClickListener: OnItemLongClickListener<View>? = null
+    private var onItemClickListener: OnItemClickListener? = null
+    private var onItemLongClickListener: OnItemLongClickListener? = null
 
     constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        val typedArray = context.obtainStyledAttributes(attrs,
+        val typedArray = context.obtainStyledAttributes(
+            attrs,
             R.styleable.AutoGridView
         )
         cellSpacing = typedArray
@@ -118,14 +119,14 @@ open class AutoGridView : ViewGroup {
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         if (hasAdapter) {
             if (childCount == 1) {
-                layoutSingleImage()
+                layoutSingleView()
             } else {
                 layoutChildView()
             }
         }
     }
 
-    private fun layoutSingleImage() {
+    private fun layoutSingleView() {
         val view = getChildAt(0)
         view.layout(
             paddingLeft,
@@ -221,22 +222,22 @@ open class AutoGridView : ViewGroup {
     /**
      * 设置 View 的点击监听
      */
-    fun setOnItemClickListener(listener: OnItemClickListener<View>) {
+    fun setOnItemClickListener(listener: OnItemClickListener) {
         onItemClickListener = listener
     }
 
     /**
      * 设置 View 的长按监听
      */
-    fun setOnItemLongClickListener(listener: OnItemLongClickListener<View>) {
+    fun setOnItemLongClickListener(listener: OnItemLongClickListener) {
         onItemLongClickListener = listener
     }
 
-    interface OnItemClickListener<V : View> {
-        fun onItemClick(view: V, position: Int)
+    interface OnItemClickListener {
+        fun onItemClick(view: View, position: Int)
     }
 
-    interface OnItemLongClickListener<V : View> {
-        fun onItemLongClick(view: V, position: Int): Boolean
+    interface OnItemLongClickListener {
+        fun onItemLongClick(view: View, position: Int): Boolean
     }
 }
