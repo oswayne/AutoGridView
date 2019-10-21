@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import org.carder.sample.moment.R
 import org.carder.view.adapter.AutoGridAdapter
+import kotlin.math.sqrt
 
 /**
  * 网格化显示多张图片
@@ -140,6 +141,9 @@ open class AutoGridView : ViewGroup {
         for (raw in 0 until realRaw) {
             for (column in 0 until realColumn) {
                 if (raw * realColumn + column < childViewList.size) {
+                    if (raw * column > maxRaw * maxColumn) {
+                        break
+                    }
                     childViewList[raw * realColumn + column].layout(
                         column * cellSpacing + column * cellSize,
                         raw * cellSpacing + raw * cellSize,
@@ -196,15 +200,31 @@ open class AutoGridView : ViewGroup {
      */
     private fun calcCellCount() {
         val count = childViewList.size
-        if (count < maxColumn) {
+        if (count <= maxColumn) {
             realColumn = count
+            realRaw = 1
         } else {
             realColumn = maxColumn
-            realRaw = if (count % maxColumn == 0) count / maxColumn else count % maxColumn + 1
+            realRaw = if (count % maxColumn == 0) {
+                count / maxColumn
+            } else {
+                count / maxColumn + 1
+            }
         }
 
-        if (count % realRaw == 0) {
-            realColumn = realRaw
+        val calcFlag = sqrt(count.toDouble()).toInt()
+        if (calcFlag * calcFlag == count) {
+            realRaw = calcFlag
+            realColumn = calcFlag
+        }
+
+        checkMaxRaw()
+    }
+
+    private fun checkMaxRaw() {
+        if (realRaw > maxRaw) {
+            realRaw = maxRaw
+            Log.w(TAG, "View count out of capacity!")
         }
     }
 

@@ -19,6 +19,17 @@ class MainActivity : AppCompatActivity() {
         imagesId.add(R.mipmap.ic_launcher)
         imagesId.add(R.mipmap.ic_launcher)
 
+        imagesId.add(R.mipmap.ic_launcher)
+        imagesId.add(R.mipmap.ic_launcher)
+        imagesId.add(R.mipmap.ic_launcher)
+        imagesId.add(R.mipmap.ic_launcher)
+
+        imagesId.add(R.mipmap.ic_launcher)
+        imagesId.add(R.mipmap.ic_launcher)
+        imagesId.add(R.mipmap.ic_launcher)
+        imagesId.add(R.mipmap.ic_launcher)
+        imagesId.add(R.mipmap.ic_launcher)
+
         val adapter = GridImageAdapter(imagesId)
         giv.setAdapter(adapter)
         giv.setOnItemClickListener(object : AutoGridView.OnItemClickListener {
