@@ -18,7 +18,7 @@ allprojects {
 2. 在模块的 `build.gradle` 文件中引入依赖:
 
 ```
-implementation 'com.github.oswayne:AutoGridView:1.0.0'
+implementation 'com.github.oswayne:AutoGridView:1.0.1'
 ```
 
 
