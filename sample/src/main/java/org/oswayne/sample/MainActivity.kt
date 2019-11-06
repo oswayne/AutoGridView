@@ -1,10 +1,10 @@
-package org.carder.sample
+package org.oswayne.sample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import org.carder.view.AutoGridView
+import org.oswayne.view.AutoGridView
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {

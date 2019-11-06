@@ -1,4 +1,4 @@
-package org.carder.sample
+package org.oswayne.sample
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <org.carder.view.AutoGridView
+    <org.oswayne.view.AutoGridView
         android:id="@+id/giv"
         android:layout_width="240dp"
         android:layout_height="160dp"

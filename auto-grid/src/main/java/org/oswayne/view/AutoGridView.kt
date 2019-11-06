@@ -1,13 +1,12 @@
-package org.carder.view
+package org.oswayne.view
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import org.carder.sample.moment.R
-import org.carder.view.adapter.AutoGridAdapter
+import org.oswayne.sample.moment.R
+import org.oswayne.view.adapter.AutoGridAdapter
 import kotlin.math.sqrt
 
 /**

@@ -1,4 +1,4 @@
-package org.carder.view.adapter
+package org.oswayne.view.adapter
 
 import android.content.Context
 import android.view.View

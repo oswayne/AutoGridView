@@ -1,4 +1,4 @@
-package org.carder.sample
+package org.oswayne.sample
 
 import org.junit.Test
 import kotlin.math.sqrt
