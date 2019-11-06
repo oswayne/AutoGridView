@@ -1,6 +1,7 @@
 package org.carder.view
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -22,9 +23,9 @@ open class AutoGridView : ViewGroup {
 
     companion object {
         const val TAG = "AutoGridView"
-        const val DEFAULT_CELL_SPACING = 10
-        const val DEFAULT_MAX_COLUMN = 3
-        const val DEFAULT_MAX_RAW = 3
+        const val DEF_CELL_SPACING = 8F
+        const val DEF_MAX_COLUMN = 3
+        const val DEF_MAX_RAW = 3
     }
 
     /**
@@ -32,62 +33,66 @@ open class AutoGridView : ViewGroup {
      * 该值是更具子 View 的数量动态计算生成的
      */
     private var cellSize = 0
+
     /**
      * 单元格间隙
      * 用户可自主设置
      */
     private val cellSpacing: Int
+
     /**
      * 最大列数
      */
     private val maxColumn: Int
+
     /**
      * 最大行数
      */
     private val maxRaw: Int
+
     /**
      * 真实列数
      */
     private var realColumn = 1
+
     /**
      * 真实行数
      */
     private var realRaw = 1
+
     /**
      * 是否渲染过
      * 用于防止重复无谓的重复绘制，影响性能
      */
     private var hasAdapter = false
 
+    /**
+     * 单个 View 时的宽度
+     */
+    private var singleViewWidth: Int
+
+    /**
+     * 单个 View 时的高度
+     */
+    private var singleViewHeight: Int
+
     private lateinit var childViewAdapter: AutoGridAdapter<*>
-
-    private var childViewList = ArrayList<View>(DEFAULT_MAX_COLUMN * DEFAULT_MAX_RAW)
-
+    private var childViewList = ArrayList<View>(DEF_MAX_COLUMN * DEF_MAX_RAW)
     private var onItemClickListener: OnItemClickListener? = null
     private var onItemLongClickListener: OnItemLongClickListener? = null
 
     constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        val typedArray = context.obtainStyledAttributes(
-            attrs,
-            R.styleable.AutoGridView
-        )
-        cellSpacing = typedArray
-            .getInteger(
-                R.styleable.AutoGridView_cellSpacing,
-                DEFAULT_CELL_SPACING
-            )
-        maxColumn = typedArray
-            .getInteger(
-                R.styleable.AutoGridView_maxColumn,
-                DEFAULT_MAX_COLUMN
-            )
-        maxRaw = typedArray
-            .getInteger(
-                R.styleable.AutoGridView_maxRaw,
-                DEFAULT_MAX_RAW
-            )
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.AutoGridView)
+        cellSpacing =
+            typedArray.getDimension(R.styleable.AutoGridView_cellSpacing, DEF_CELL_SPACING).toInt()
+        maxColumn = typedArray.getInteger(R.styleable.AutoGridView_maxColumn, DEF_MAX_COLUMN)
+        maxRaw = typedArray.getInteger(R.styleable.AutoGridView_maxRaw, DEF_MAX_RAW)
+        singleViewWidth =
+            typedArray.getDimension(R.styleable.AutoGridView_singleViewWidth, 0F).toInt()
+        singleViewHeight =
+            typedArray.getDimension(R.styleable.AutoGridView_singleViewHeight, 0F).toInt()
         typedArray.recycle()
     }
 
@@ -105,8 +110,13 @@ open class AutoGridView : ViewGroup {
         if (childViewAdapter.count == 1) {
             // 单 View 模式
             cellSize = getChildAt(0).measuredWidth
-            width = getChildAt(0).measuredWidth
-            height = getChildAt(0).measuredHeight
+            if (singleViewWidth != 0 && singleViewHeight != 0) {
+                width = singleViewWidth
+                height = singleViewHeight
+            } else {
+                width = getChildAt(0).measuredWidth
+                height = getChildAt(0).measuredHeight
+            }
         } else {
             // 多 View 模式
             cellSize =
@@ -129,11 +139,13 @@ open class AutoGridView : ViewGroup {
 
     private fun layoutSingleView() {
         val view = getChildAt(0)
+        view.layoutParams.width = singleViewWidth
+        view.layoutParams.height = singleViewHeight
         view.layout(
             paddingLeft,
             paddingTop,
-            view.measuredWidth + paddingRight,
-            view.measuredHeight + paddingBottom
+            singleViewWidth + paddingRight,
+            singleViewHeight + paddingBottom
         )
     }
 

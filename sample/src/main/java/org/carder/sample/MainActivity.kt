@@ -15,20 +15,20 @@ class MainActivity : AppCompatActivity() {
 
         val imagesId = ArrayList<Int>()
         imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
-
-        imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
-
-        imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
-        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
+//
+//        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
+//
+//        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
+//        imagesId.add(R.mipmap.ic_launcher)
 
         val adapter = GridImageAdapter(imagesId)
         giv.setAdapter(adapter)
